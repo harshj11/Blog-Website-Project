@@ -1,0 +1,11 @@
+node_modules
+build
+npm-debug.log
+.nyc
+.env
+.DS_Store
+
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
