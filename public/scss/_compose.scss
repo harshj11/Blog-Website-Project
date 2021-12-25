@@ -1,0 +1,54 @@
+.post {
+    
+    p {
+        font-size: 1.1rem;
+        margin: 0.5rem 0;
+    }
+
+    &__text {
+        border: solid 1px #000;
+        border-radius: 0.3rem;
+        font-family: 'Public Sans', sans-serif;
+        font-size: 1rem;
+        outline: none;
+        padding: 0.5rem 0.3rem;
+        width: 100%;
+
+        &:focus {
+            border: solid 1px orange;
+        }
+    }
+    
+    &__title {
+
+        &__text {
+            height: 2rem;            
+        }
+    }
+
+    &__content {
+        margin: 1rem 0;
+
+        &__text {
+            resize: none;
+        }
+    }
+
+    .btn {
+        background: none;
+        border: solid 1px #000;
+        border-radius: 0.3125rem;
+        color: #000;
+        cursor: pointer;
+        font-size: 1.1rem;
+        padding: 0.6rem;
+        transition: all 200ms ease-in-out;
+
+        &:hover {
+            border: solid 1px orange;
+            background-color: orange;
+            color: #fff;
+        }
+    }
+}
+// background: linear-gradient(10deg, orange 25%, white 75%);

@@ -72,7 +72,7 @@
 
             &:hover {
                 background-color: orange;
-                border-radius: 5px;
+                border-radius: 0.3125rem;
                 color: #fff;
             }
         }
@@ -86,6 +86,7 @@
 
         background-color: #fff;
         border-radius: 0.2rem;
+        display: none;
         margin: 0 auto;
         opacity: 0;
         position: absolute;
@@ -109,12 +110,14 @@
         }  
 
         &.active {
+            display: block;
             opacity: 1;
         }
     }
 
     .overlay {
         background: linear-gradient(#2d314d, transparent);
+        display: none;
         opacity: 0;
         position: absolute;
         top: 4rem;
@@ -125,6 +128,7 @@
         z-index: 0;
 
         &.active {
+            display: block;
             opacity: 1;
             pointer-events: none;
         }

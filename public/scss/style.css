@@ -15,6 +15,10 @@ body {
   padding: 0;
 }
 
+p {
+  color: #000;
+}
+
 a {
   color: #000;
   text-decoration: none;
@@ -144,7 +148,7 @@ a {
 
 .header__default__links a:hover {
   background-color: orange;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   color: #fff;
 }
 
@@ -157,6 +161,7 @@ a {
 .header__mobile__links {
   background-color: #fff;
   border-radius: 0.2rem;
+  display: none;
   margin: 0 auto;
   opacity: 0;
   position: absolute;
@@ -182,12 +187,14 @@ a {
 }
 
 .header__mobile__links.active {
+  display: block;
   opacity: 1;
 }
 
 .header .overlay {
   background: -webkit-gradient(linear, left top, left bottom, from(#2d314d), to(transparent));
   background: linear-gradient(#2d314d, transparent);
+  display: none;
   opacity: 0;
   position: absolute;
   top: 4rem;
@@ -200,7 +207,57 @@ a {
 }
 
 .header .overlay.active {
+  display: block;
   opacity: 1;
   pointer-events: none;
+}
+
+.post p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.post__text {
+  border: solid 1px #000;
+  border-radius: 0.3rem;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  padding: 0.5rem 0.3rem;
+  width: 100%;
+}
+
+.post__text:focus {
+  border: solid 1px orange;
+}
+
+.post__title__text {
+  height: 2rem;
+}
+
+.post__content {
+  margin: 1rem 0;
+}
+
+.post__content__text {
+  resize: none;
+}
+
+.post .btn {
+  background: none;
+  border: solid 1px #000;
+  border-radius: 0.3125rem;
+  color: #000;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.6rem;
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+
+.post .btn:hover {
+  border: solid 1px orange;
+  background-color: orange;
+  color: #fff;
 }
 /*# sourceMappingURL=style.css.map */
