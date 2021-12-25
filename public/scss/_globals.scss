@@ -8,13 +8,13 @@ html {
 }
 
 body {
-    font-family: 'Roboto', 'sans-serif';
+    font-family: 'Public Sans', sans-serif;
     margin: 0;
     padding: 0;
 }
 
 a {
-    color: #fff;
+    color: #000;
     text-decoration: none;
 }
 
@@ -25,7 +25,27 @@ a {
         justify-content: center;
     }
 
+    &-jc-sa {
+        justify-content: space-around;
+    }
+
+    &-jc-sb {
+        justify-content: space-between;
+    }
+
     &-ai-c {
         align-items: center;
+    }
+}
+
+.container {
+    margin: 0 7rem;
+
+    @include breakpoint-down(medium) {
+        margin: 0 4rem;
+    }
+
+    @include breakpoint-down(small) {
+        margin: 0 1.75rem;
     }
 }
