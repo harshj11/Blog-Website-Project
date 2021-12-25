@@ -40,9 +40,18 @@ app.get("/compose", (req, res) => {
 });
 
 app.post("/compose", (req, res) => {
+
+    const postContent = req.body.postContent;
+    let truncatedPostContent = null;
+
+    if(postContent.length > 100) {
+        truncatedPostContent = postContent.substring(0, 100) + "...";
+    }
+
     const post = {
         title: req.body.postTitle,
-        content: req.body.postContent
+        content: req.body.postContent,
+        truncatedContent: truncatedPostContent
     }
 
     posts.push(post);

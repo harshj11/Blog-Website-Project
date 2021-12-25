@@ -1,14 +1,18 @@
 <%- include("header") -%>
 
 <div class="container">
-    <h1 class="rendered__post__title">Home</h1>
-    <p class="rendered__post__content"><%= homeStartingContent %></p>
+    <h1>Home</h1>
+    <p><%= homeStartingContent %></p>
 </div>
 
 <% postsToRender.forEach(post => { %>
     <div class="container">
-        <h1 class="rendered__post__title"><%= post.title %></h1>
-        <p class="rendered__post__content"><%= post.content %></p>
+        <h1><%= post.title %></h1>
+        <% if(post.truncatedContent === null) { %>
+            <p><%= post.content %></p>
+        <% } else { %>
+            <p><%= post.truncatedContent %><a href="/posts/<%= post.title %>" class="read__more">Read more</a></p>
+        <% } %>
     </div>
 <% }); %>
 
