@@ -1,0 +1,133 @@
+.header {
+    
+    box-shadow: 0 1px 0.8rem 0 rgba(0, 0, 0, 0.05);
+    border-bottom: solid 0.1rem orange;
+    color: #000;
+    padding: 1.1rem 0;
+
+    &__logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        letter-spacing: 3px;
+    }
+
+    &__hamburger__menu {
+        
+        > span { 
+            background-color: #000;
+            display: block;
+            height: 0.125rem;
+            width: 1.625rem;
+            transform-origin: 3px 1px;
+            transition: all 200ms ease-in-out;
+
+            &:not(:last-child) {
+                margin-bottom: 0.3125rem;
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &.open {
+    
+            >span {
+                transition: all 200ms ease-in-out;
+            }
+
+            >span:first-child {
+                position: relative;
+                transform: rotate(45deg);
+            }
+
+            >span:nth-child(2) {
+                opacity: 0;
+            }
+
+            >span:last-child {
+                position: relative;
+                transform: rotate(-45deg);
+            }
+        }
+
+        @include breakpoint-up(medium) {
+            display: none;
+        }
+    }
+
+    &__default__links {
+        a {
+            font-size: 1rem;
+            padding: 0.8rem;
+            transition: all 200ms ease-in-out;
+
+            &:not(:last-child) {
+                margin-right: 3rem;
+
+                @include breakpoint-down(medium) {
+                    margin-right: 1.75rem;
+                }
+            }
+
+            &:hover {
+                background-color: orange;
+                border-radius: 5px;
+                color: #fff;
+            }
+        }
+        
+        @include breakpoint-down(small) {
+            display: none;
+        }
+    }
+
+    &__mobile__links {
+
+        background-color: #fff;
+        border-radius: 0.2rem;
+        margin: 0 auto;
+        opacity: 0;
+        position: absolute;
+        top: 5rem;
+        right: 0;
+        left: 0;
+        text-align: center;
+        width: 90%;
+        z-index: 1;
+
+        > a {
+            display: block;
+            padding: 0.75rem;
+            transition: all 200ms ease-in-out;
+
+            &:hover {
+                background-color: orange;
+                border-radius: 0.2rem;
+                color: #fff;
+            }
+        }  
+
+        &.active {
+            opacity: 1;
+        }
+    }
+
+    .overlay {
+        background: linear-gradient(#2d314d, transparent);
+        opacity: 0;
+        position: absolute;
+        top: 4rem;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transition: all 200ms ease-in-out;
+        z-index: 0;
+
+        &.active {
+            opacity: 1;
+            pointer-events: none;
+        }
+    }
+}
+
