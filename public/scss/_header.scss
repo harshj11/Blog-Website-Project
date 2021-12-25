@@ -16,18 +16,28 @@
         > span { 
             background-color: #000;
             display: block;
-            height: 0.2rem;
-            width: 1.2rem;
+            height: 0.125rem;
+            width: 1.625rem;
+            transform-origin: 3px 1px;
+            transition: all 200ms ease-in-out;
 
             &:not(:last-child) {
-                margin-bottom: 0.25rem;
+                margin-bottom: 0.3125rem;
             }
         }
 
+        &:hover {
+            cursor: pointer;
+        }
+
         &.open {
+    
+            >span {
+                transition: all 200ms ease-in-out;
+            }
+
             >span:first-child {
                 position: relative;
-                top: 8px;
                 transform: rotate(45deg);
             }
 
@@ -37,7 +47,6 @@
 
             >span:last-child {
                 position: relative;
-                top: -6px;
                 transform: rotate(-45deg);
             }
         }
@@ -78,6 +87,7 @@
         background-color: #fff;
         border-radius: 0.2rem;
         margin: 0 auto;
+        opacity: 0;
         position: absolute;
         top: 5rem;
         right: 0;
@@ -96,21 +106,28 @@
                 border-radius: 0.2rem;
                 color: #fff;
             }
-            // &::after {
-            //     border: solid 1px black;
-            //     content: "";
-            // }
         }  
+
+        &.active {
+            opacity: 1;
+        }
     }
 
     .overlay {
         background: linear-gradient(#2d314d, transparent);
-        position: fixed;
+        opacity: 0;
+        position: absolute;
         top: 4rem;
         right: 0;
         bottom: 0;
         left: 0;
+        transition: all 200ms ease-in-out;
         z-index: 0;
+
+        &.active {
+            opacity: 1;
+            pointer-events: none;
+        }
     }
 }
 
