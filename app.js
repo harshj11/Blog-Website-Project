@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const lodash = require('lodash');
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -45,6 +47,18 @@ app.post("/compose", (req, res) => {
 
     posts.push(post);
     res.redirect("/");
+});
+
+app.get("/posts/:postTitle", (req, res) => {
+    const requestedPost = req.params.postTitle;
+    
+    for(let i = 0; i < posts.length; i++) {
+        if(lodash.lowerCase(posts[i].title) === lodash.lowerCase(requestedPost)) {
+            res.render("post", {
+                post: posts[i]
+            });
+        }
+    }
 });
 
 app.listen(3000, () => {
