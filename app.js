@@ -15,10 +15,20 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 app.get("/", (req, res) => {
     res.render("home", {
         homeStartingContent: homeStartingContent,
-        aboutContent: aboutContent,
-        contactContent: contactContent
+    });
+});
+
+app.get("/about", (req, res) => {
+    res.render("about", {
+        aboutStartingContent: aboutContent
     });
 })
+
+app.get("/contact", (req, res) => {
+    res.render("contact", {
+        contactStartingContent: contactContent
+    });
+});
 
 app.listen(3000, () => {
     console.log("Server started on port 3000");
