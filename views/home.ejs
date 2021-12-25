@@ -1,8 +1,15 @@
 <%- include("header") -%>
 
-<h1>Home</h1>
-<p><%= homeStartingContent %></p>
-<p><%= aboutContent %></p>
-<p><%= contactContent %></p>
+<div class="container">
+    <h1 class="rendered__post__title">Home</h1>
+    <p class="rendered__post__content"><%= homeStartingContent %></p>
+</div>
+
+<% postsToRender.forEach(post => { %>
+    <div class="container">
+        <h1 class="rendered__post__title"><%= post.title %></h1>
+        <p class="rendered__post__content"><%= post.content %></p>
+    </div>
+<% }); %>
 
 <script src="/scripts/script.js"></script>
