@@ -8,7 +8,11 @@
 <% postsToRender.forEach(post => { %>
     <div class="container">
         <h1 class="rendered__post__title"><%= post.title %></h1>
-        <p class="rendered__post__content"><%= post.content %></p>
+        <% if(post.truncatedContent === null) { %>
+            <p class="rendered__post__content"><%= post.content %></p>
+        <% } else { %>
+            <p class="rendered__post__content"><%= post.truncatedContent %></p>
+        <% } %>
     </div>
 <% }); %>
 
