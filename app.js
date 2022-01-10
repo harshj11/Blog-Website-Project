@@ -28,15 +28,6 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 
 const posts = [];
 
-const sampleDBPost = new Post({
-    title: "Sample Post",
-    content: "Sample Content",
-    date: new Date().toISOString().slice(0, 10)
-});
-
-sampleDBPost.save()
-    .then(promise => console.log("Post with id " + promise._id + " is saved"));
-
 app.get("/", (req, res) => {
     res.render("home", {
         homeStartingContent: homeStartingContent,
@@ -92,5 +83,14 @@ app.get("/posts/:postTitle", (req, res) => {
 });
 
 app.listen(3000, () => {
+    Post.find((err, foundPosts) => {
+        if(err) {
+            console.log(err);
+        } else {
+            foundPosts.forEach(post => {
+                posts.push(post);
+            });
+        }
+    });
     console.log("Server started on port 3000");
 });
