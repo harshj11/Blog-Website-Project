@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const lodash = require('lodash');
-
 const app = express();
 
 const mongoose = require('mongoose');
@@ -84,16 +82,20 @@ app.post("/compose", (req, res) => {
 
 });
 
-app.get("/posts/:postTitle", (req, res) => {
-    const requestedPost = req.params.postTitle;
-    
+app.get("/posts/:postId", (req, res) => {
+    const requestedPostId = req.params.postId;
+    let requestedPost = null;
+
     for(let i = 0; i < posts.length; i++) {
-        if(lodash.lowerCase(posts[i].title) === lodash.lowerCase(requestedPost)) {
-            res.render("post", {
-                post: posts[i]
-            });
+        if(posts[i]._id == requestedPostId) {
+            requestedPost = posts[i];
+            break;
         }
     }
+
+    res.render("post", {
+        post: requestedPost
+    });
 });
 
 app.listen(3000, () => {
