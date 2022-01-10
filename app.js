@@ -17,7 +17,14 @@ mongoose.connect("mongodb://localhost:27017/blogDB");
 const postSchema = mongoose.Schema({
     title: String,
     content: String,
-    date: Date
+    date: {
+        type: Date,
+        default: new Date().toISOString().slice(0, 10)
+    },
+    truncatedContent: {
+        type: String,
+        default: null
+    }
 });
 
 const Post = mongoose.model("post", postSchema);
@@ -60,14 +67,21 @@ app.post("/compose", (req, res) => {
         truncatedPostContent = postContent.substring(0, 100) + "...";
     }
 
-    const post = {
+    const post = new Post({
         title: req.body.postTitle,
         content: req.body.postContent,
         truncatedContent: truncatedPostContent
-    }
+    });
 
     posts.push(post);
-    res.redirect("/");
+
+    post.save()
+        .then(promise => {
+            console.log("Post successfully saved to database.");
+            res.redirect("/");
+        })
+        .catch(err => console.log(err));
+
 });
 
 app.get("/posts/:postTitle", (req, res) => {
