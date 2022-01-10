@@ -11,7 +11,7 @@
         <% if(post.truncatedContent === null) { %>
             <p><%= post.content %></p>
         <% } else { %>
-            <p><%= post.truncatedContent %><a href="/posts/<%= post.title %>" class="read__more">Read more</a></p>
+            <p><%= post.truncatedContent %><a href="/posts/<%= post._id %>" class="read__more">Read more</a></p>
         <% } %>
     </div>
 <% }); %>
