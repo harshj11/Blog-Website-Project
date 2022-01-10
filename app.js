@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const lodash = require('lodash');
-
 const app = express();
 
 const mongoose = require('mongoose');
@@ -17,7 +15,14 @@ mongoose.connect("mongodb://localhost:27017/blogDB");
 const postSchema = mongoose.Schema({
     title: String,
     content: String,
-    date: Date
+    date: {
+        type: Date,
+        default: new Date().toISOString().slice(0, 10)
+    },
+    truncatedContent: {
+        type: String,
+        default: null
+    }
 });
 
 const Post = mongoose.model("post", postSchema);
@@ -27,15 +32,6 @@ const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pelle
 const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
 
 const posts = [];
-
-const sampleDBPost = new Post({
-    title: "Sample Post",
-    content: "Sample Content",
-    date: new Date().toISOString().slice(0, 10)
-});
-
-sampleDBPost.save()
-    .then(promise => console.log("Post with id " + promise._id + " is saved"));
 
 app.get("/", (req, res) => {
     res.render("home", {
@@ -69,28 +65,48 @@ app.post("/compose", (req, res) => {
         truncatedPostContent = postContent.substring(0, 100) + "...";
     }
 
-    const post = {
+    const post = new Post({
         title: req.body.postTitle,
         content: req.body.postContent,
         truncatedContent: truncatedPostContent
-    }
+    });
 
     posts.push(post);
-    res.redirect("/");
+
+    post.save()
+        .then(promise => {
+            console.log("Post successfully saved to database.");
+            res.redirect("/");
+        })
+        .catch(err => console.log(err));
+
 });
 
-app.get("/posts/:postTitle", (req, res) => {
-    const requestedPost = req.params.postTitle;
-    
+app.get("/posts/:postId", (req, res) => {
+    const requestedPostId = req.params.postId;
+    let requestedPost = null;
+
     for(let i = 0; i < posts.length; i++) {
-        if(lodash.lowerCase(posts[i].title) === lodash.lowerCase(requestedPost)) {
-            res.render("post", {
-                post: posts[i]
-            });
+        if(posts[i]._id == requestedPostId) {
+            requestedPost = posts[i];
+            break;
         }
     }
+
+    res.render("post", {
+        post: requestedPost
+    });
 });
 
 app.listen(3000, () => {
+    Post.find((err, foundPosts) => {
+        if(err) {
+            console.log(err);
+        } else {
+            foundPosts.forEach(post => {
+                posts.push(post);
+            });
+        }
+    });
     console.log("Server started on port 3000");
 });
